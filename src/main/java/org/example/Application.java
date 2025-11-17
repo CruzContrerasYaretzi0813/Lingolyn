@@ -27,7 +27,7 @@ public class Application {
     }
 
     public static void registro(){
-        System.out.println("Por favor, ingresa tu nombre (como quieres que te llamemos);");
+        System.out.println("Por favor, ingresa tu nombre (como quieres que te llamemos");
         usuario = sc.nextLine();
     }
 
