@@ -14,8 +14,8 @@ public class Application {
         System.out.println("║                                                                ║");
         System.out.println("║  L     I  N     N    GGGG     OOO     L     Y     N     N      ║");
         System.out.println("║  L     I  N N   N   G        O   O    L     Y     N N   N      ║");
-        System.out.println("║  L     I  N   N N   G  GG    O   O    L     Y     N  N  N      ║");
-        System.out.println("║  L     I  N     N   G   G    O   O    L     Y     N   N N      ║");
+        System.out.println("║  L     I  N  N  N   G  GG    O   O    L     Y     N  N  N      ║");
+        System.out.println("║  L     I  N   N N   G   G    O   O    L     Y     N   N N      ║");
         System.out.println("║  LLLL  I  N     N    GGG      OOO     LLL   Y     N     N      ║");
         System.out.println("║                                                                ║");
         System.out.println("╚════════════════════════════════════════════════════════════════╝");
