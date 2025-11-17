@@ -10,10 +10,18 @@ public class Application {
     public static void main(String[] args) {
         /*Bienvenida*/
         char simbolo = (char) 42;
-        String palabra = "Lingolyn";
-        String titulo = String.valueOf(simbolo).repeat(10) + palabra + String.valueOf(simbolo).repeat(10);
-        System.out.println(titulo);
-        System.out.println("¡Bienvenido a Lingolyn!");
+        System.out.println("╔══════════════════════════════════════════════════════╗");
+        System.out.println("║                                                      ║");
+        System.out.println("║  L     Y     GGGG     OOO     L     I     N     N    ║");
+        System.out.println("║  L     Y    G        O   O    L     I     N N   N    ║");
+        System.out.println("║  L     Y    G  GG    O   O    L     I     N  N  N    ║");
+        System.out.println("║  L     Y    G   G    O   O    L     I     N   N N    ║");
+        System.out.println("║  LLLL  Y     GGG      OOO     LLL   I     N     N    ║");
+        System.out.println("║                                                      ║");
+        System.out.println("╚══════════════════════════════════════════════════════╝");
+        System.out.println("+=====================================================+");
+        System.out.println("║               ¡Bienvenido a Lingolyn!               ║");
+        System.out.println("+=====================================================+");"
         registro();
         moduloGeneral();
     }
