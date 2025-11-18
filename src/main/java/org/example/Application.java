@@ -7,23 +7,23 @@ public class Application {
     static String nivel;
 
 
-    public static void main(String[] args) {
-        /*Bienvenida*/
-        char simbolo = (char) 42;
-        System.out.println("╔════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                                                                ║");
-        System.out.println("║  L     I  N     N    GGGG     OOO     L     Y     N     N      ║");
-        System.out.println("║  L     I  N N   N   G        O   O    L     Y     N N   N      ║");
-        System.out.println("║  L     I  N  N  N   G  GG    O   O    L     Y     N  N  N      ║");
-        System.out.println("║  L     I  N   N N   G   G    O   O    L     Y     N   N N      ║");
-        System.out.println("║  LLLL  I  N     N    GGG      OOO     LLL   Y     N     N      ║");
-        System.out.println("║                                                                ║");
-        System.out.println("╚════════════════════════════════════════════════════════════════╝");
-        System.out.println("+=====================================================+");
-        System.out.println("║               ¡Bienvenido a Lingolyn!               ║");
-        System.out.println("+=====================================================+");
-        registro();
-        moduloGeneral();
+   public static void main(String[] args) {
+            /*Bienvenida*/
+            char simbolo = (char) 42;
+            System.out.println("╔════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                                                                ║");
+            System.out.println("║  L     I  N     N    GGGG     OOO     L    Y   Y    N     N    ║");
+            System.out.println("║  L     I  N N   N   G        O   O    L     Y Y     N N   N    ║");
+            System.out.println("║  L     I  N  N  N   G  GG    O   O    L      Y      N  N  N    ║");
+            System.out.println("║  L     I  N   N N   G   G    O   O    L      Y      N   N N    ║");
+            System.out.println("║  LLLL  I  N     N    GGG      OOO     LLL    Y      N     N    ║");
+            System.out.println("║                                                                ║");
+            System.out.println("╚════════════════════════════════════════════════════════════════╝");
+            System.out.println("+=====================================================+");
+            System.out.println("║               ¡Bienvenido a Lingolyn!               ║");
+            System.out.println("+=====================================================+");
+            registro();
+            moduloGeneral();
     }
 
     public static void registro(){
