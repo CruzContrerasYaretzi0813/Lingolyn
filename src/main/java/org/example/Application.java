@@ -10,18 +10,18 @@ public class Application {
    public static void main(String[] args) {
             /*Bienvenida*/
             char simbolo = (char) 42;
-            System.out.println("╔════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                                                                ║");
-            System.out.println("║  L     I  N     N    GGGG     OOO     L    Y   Y    N     N    ║");
-            System.out.println("║  L     I  N N   N   G        O   O    L     Y Y     N N   N    ║");
-            System.out.println("║  L     I  N  N  N   G  GG    O   O    L      Y      N  N  N    ║");
-            System.out.println("║  L     I  N   N N   G   G    O   O    L      Y      N   N N    ║");
-            System.out.println("║  LLLL  I  N     N    GGG      OOO     LLL    Y      N     N    ║");
-            System.out.println("║                                                                ║");
-            System.out.println("╚════════════════════════════════════════════════════════════════╝");
-            System.out.println("+=====================================================+");
-            System.out.println("║               ¡Bienvenido a Lingolyn!               ║");
-            System.out.println("+=====================================================+");
+             System.out.println("         ////////////////////////////////////////////////////////////////////");
+             System.out.println("         //██╗     ██╗███╗   ██╗ ██████╗  ██████╗ ██╗  ██╗   ██╗███╗   ██╗ //");
+             System.out.println("         //██║     ██║████╗  ██║██╔════╝ ██╔═══██╗██║  ╚██╗ ██╔╝████╗  ██║ //");
+             System.out.println("         //██║     ██║██╔██╗ ██║██║  ███╗██║   ██║██║   ╚████╔╝ ██╔██╗ ██║ //");
+             System.out.println("         //██║     ██║██║╚██╗██║██║   ██║██║   ██║██║    ╚██╔╝  ██║╚██╗██║ //");
+             System.out.println("         //███████╗██║██║ ╚████║╚██████╔╝╚██████╔╝███████╗██║   ██║ ╚████║ //");
+             System.out.println("         //╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═══╝ //");
+             System.out.println("         ////////////////////////////////////////////////////////////////////");
+             System.out.println("\n");
+             System.out.println("               +=====================================================+");
+             System.out.println("               ║               ¡Bienvenido a Lingolyn!               ║");
+             System.out.println("               +=====================================================+");
             registro();
             moduloGeneral();
     }
@@ -42,8 +42,18 @@ public class Application {
             switch (opcionprincipal) {
                 case 1:
                     nivel="el nivel";
-                    System.out.println(usuario + ", elegiste: Spelling Bee.");
-
+                   System.out.println(nombre + ", elegiste:");
+                            String art =
+                                    "···············································································\n" +
+                                            ": #####                                                 ######               :\n" +
+                                            ":#     # #####  ###### #      #      # #    #  ####     #     # ###### ######:\n" +
+                                            ":#       #    # #      #      #      # ##   # #    #    #     # #      #     :\n" +
+                                            ": #####  #    # #####  #      #      # # #  # #         ######  #####  ##### :\n" +
+                                            ":      # #####  #      #      #      # #  # # #  ###    #     # #      #     :\n" +
+                                            ":#     # #      #      #      #      # #   ## #    #    #     # #      #     :\n" +
+                                            ": #####  #      ###### ###### ###### # #    #  ####     ######  ###### ######:\n" +
+                                            "··············································································";
+                            System.out.println(art);
                     /*DECLARACION DE NIVELES SPELLING BEE*/
                     String [] nsbBasico = {"add", "eye", "ear", "boat", "happy", "lion", "night", "milk", "uncle", "thank"};
                     String [] nsbMedio = {"chef", "brush", "sister", "desert", "kitchen", "Monday", "breakfast", "horse", "quite", "listen"};
@@ -106,8 +116,15 @@ public class Application {
                 case 2:
                     nivel ="la categoría gramatical";
                     /*Preguntar modalidad Vocabulario*/
-                    System.out.println(usuario + ", elegiste: Vocabulario.");
-
+                   System.out.println(nombre + ", elegiste: ");
+                        String art2=
+                                " _     ____  ____ ____  ____  _     _     ____  ____  _  ____ \n" +
+                                "/ \\ |\\/  _ \\/   _Y  _ \\/  _ \\/ \\ /\\/ \\   /  _ \\/  __\\/ \\/  _ \\\n" +
+                                "| | //| / \\||  / | / \\|| | //| | ||| |   | / \\||  \\/|| || / \\|\n" +
+                                "| \\// | \\_/||  \\_| |-||| |_\\\\| \\_/|| |_/\\| |-|||    /| || \\_/|\n" +
+                                "\\__/  \\____/\\____|_/ \\|\\____/\\____/\\____/\\_/ \\|\\_/\\_\\\\_/\\____/\n" +
+                                "                                                              \n";
+                    System.out.println(art2);
                     /*DECLARACION DE NIVELES SPELLING BEE*/
                     String [] nvVerbo = {"manage", "expect", "suggest", "borrow", "lend", "give up", "happen", "improve", "worry", "look for"};
                     String [] nvSustantivo = {"career", "skill", "knowledge", "solution", "environment", "experience", "luggage", "customer", "opinion", "traffic"};
