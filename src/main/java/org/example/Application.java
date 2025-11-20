@@ -1,33 +1,75 @@
 import java.util.Scanner;
+import java.util.Arrays;
 public class Application {
     static Scanner sc = new Scanner(System.in);
     static String usuario;
     static String nnombre;
     static String allnombre;
     static String nivel;
+    private static final String[] PALABRAS_BASE = {"PROGRAMACION", "JAVA", "DESARROLLO", "CODIGO", "COMPUTADORA"};
+    private static String[] PALABRAS_JUEGO = PALABRAS_BASE;
+    private static String palabraSecreta;
+    private static char[] palabraAdivinada;
+    private static char[] letrasIncorrectas = new char[6];
+    private static int contadorIncorrectas = 0;
+    private static final int INTENTOS_MAXIMOS = 6;
 
-
-   public static void main(String[] args) {
-            /*Bienvenida*/
-            char simbolo = (char) 42;
-             System.out.println("         ////////////////////////////////////////////////////////////////////");
-             System.out.println("         //██╗     ██╗███╗   ██╗ ██████╗  ██████╗ ██╗  ██╗   ██╗███╗   ██╗ //");
-             System.out.println("         //██║     ██║████╗  ██║██╔════╝ ██╔═══██╗██║  ╚██╗ ██╔╝████╗  ██║ //");
-             System.out.println("         //██║     ██║██╔██╗ ██║██║  ███╗██║   ██║██║   ╚████╔╝ ██╔██╗ ██║ //");
-             System.out.println("         //██║     ██║██║╚██╗██║██║   ██║██║   ██║██║    ╚██╔╝  ██║╚██╗██║ //");
-             System.out.println("         //███████╗██║██║ ╚████║╚██████╔╝╚██████╔╝███████╗██║   ██║ ╚████║ //");
-             System.out.println("         //╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═══╝ //");
-             System.out.println("         ////////////////////////////////////////////////////////////////////");
-             System.out.println("\n");
-             System.out.println("               +=====================================================+");
-             System.out.println("               ║               ¡Bienvenido a Lingolyn!               ║");
-             System.out.println("               +=====================================================+");
-            registro();
-            moduloGeneral();
+    public static void main(String[] args) {
+        /*Bienvenida*/
+        char simbolo = (char) 42;
+        System.out.println("\n");
+        System.out.println("         ////////////////////////////////////////////////////////////////////");
+        System.out.println("         //██╗     ██╗███╗   ██╗ ██████╗  ██████╗ ██╗  ██╗   ██╗███╗   ██╗ //");
+        System.out.println("         //██║     ██║████╗  ██║██╔════╝ ██╔═══██╗██║  ╚██╗ ██╔╝████╗  ██║ //");
+        System.out.println("         //██║     ██║██╔██╗ ██║██║  ███╗██║   ██║██║   ╚████╔╝ ██╔██╗ ██║ //");
+        System.out.println("         //██║     ██║██║╚██╗██║██║   ██║██║   ██║██║    ╚██╔╝  ██║╚██╗██║ //");
+        System.out.println("         //███████╗██║██║ ╚████║╚██████╔╝╚██████╔╝███████╗██║   ██║ ╚████║ //");
+        System.out.println("         //╚══════╝╚═╝╚═╝  ╚═══╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝   ╚═╝  ╚═══╝ //");
+        System.out.println("         ////////////////////////////////////////////////////////////////////");
+        System.out.println("           =::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::\n" +
+                "           =::::::::::::::::+@#+:::::::::::::::::::::::+@-=:::::::::::::::::\n" +
+                "           =:::::::::::::::::+%-::::::::::::::::::::::::@=::::::::::::::::::\n" +
+                "           =:::::::::::::::::::+-::::::::::::::::::::::*::::::::::::::::::::\n" +
+                "           =::::::::::::::::::::+:::::::::::::::::::::+-::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::#-::::::::::::::::::#-:::::::::::::::::::::\n" +
+                "           =::::::::::::::::::::::+-::::::::::::::::#:::::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::::+-::::::::::::::+-:::::::::::::::::::::::\n" +
+                "           =::::::::::::::::::::::::*--=#%%%%%#+-:#:::::::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::::+#=......::....-*+:::::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::*@-::::::::::::::::.=#:::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::-#-:::::::::::::::::...:#-:::::::::::::::::::\n" +
+                "           =:::::::::-+  :#=::=%-:::::::::::::::::::. ..%=::-#+-+=::::::::::\n" +
+                "           =:::::::::*     -%%-:::=+-::::::::::::=-:. .:%#=     +-:::::::::\n" +
+                "           =:::::::::=.    .=.#=:::*@#+*:::::::::-@@+%:..:-+ .   +-:::::::::\n" +
+                "           =:::::::::-=    +%+::::+@@@+::=-::=::-@@@@:::::#.*.   #::::::::::\n" +
+                "           =::::::::::+. :=+%=::::::::::::===:::::--::::::*+:+. :=::::::::::\n" +
+                "           =:::::::::::#    #-::::::::::::::::::::::::::::+-    *:::::::::::\n" +
+                "           =::::::::::::+:  #-::::::::::::::::::::::::::::+-   #::::::::::::\n" +
+                "           =:::::::::::::+ -#-::::::::::::::::::::::::::::#: .*:::::::::::::\n" +
+                "           =:::::::::::::::@@@#+-::::::::::::::::::::::-=%@ -+::::::::::::::\n" +
+                "           =::::::::::::::::#@@@@@@@%*=----------=+#@@@@@@@#::::::::::::::::\n" +
+                "           =::::::::::::::::=%%@@@@@@@@@@@@@@@@@@@@@@@@@@@#:::::::::::::::::\n" +
+                "           =:::::::::::::::=%@+---+*%@@@@@@@@@@@@@@@#*===@@*::::::::::::::::\n" +
+                "           =:::::::::::::::%:-@@@@=-------------------=%@#:@%-::::::::::::::\n" +
+                "           =::::::::::::::::::-@@@@@@@@@@@@@@@@@@@@@@@@@@:::::::::::::::::::\n" +
+                "           =:::::::::::::::::::-@*@@@@@@@@@@@@@@@@@@@@@@::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::@#+==----====------=#%:::::::::::::::::::::\n" +
+                "           =::::::::::::::::::::::-@@@@@@@@@@@@@@@@@@=::::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::::::@@@@@@@@@@@@@@=::::::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::::::::-*@@@@@@*=:::::::::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::::::::::#+:-@-:::::::::::::::::::::::::::::\n" +
+                "           =:::::::::::::::::::::::::::::#+:-@-:::::::::::::::::::::::::::::\n" +
+                "           =::::::::::::::::::::::::::#@@@=:-@@@@-::::::::::::::::::::::::::\n");
+        System.out.println("               +=====================================================+");
+        System.out.println("               ║               ¡Bienvenido a Lingolyn!               ║");
+        System.out.println("               +=====================================================+");
+        System.out.println("\n");
+        registro();
+        moduloGeneral();
     }
 
-    public static void registro(){
-        System.out.println("Por favor, ingresa tu nombre (como quieres que te llamemos");
+    public static void registro() {
+        System.out.println("    Por favor, ingresa tu nombre (como quieres que te llamemos");
         usuario = sc.nextLine();
     }
 
@@ -38,28 +80,36 @@ public class Application {
         System.out.print("1. Spelling Bee (deletreo)\n2. Vocabulario (ampliar palabras)\nElige 1 o 2: ");
         /*leer que desea practicar*/
         do {
-            opcionprincipal = sc.nextInt();
+            if (sc.hasNextInt()) {
+                opcionprincipal = sc.nextInt();
+            } else {
+                sc.next(); // Consumir entrada no válida
+                opcionprincipal = 0; // Para forzar el default/repetir
+            }
+
             switch (opcionprincipal) {
                 case 1:
-                    nivel="el nivel";
-                   System.out.println(nombre + ", elegiste:");
-                            String art =
-                                    "···············································································\n" +
-                                            ": #####                                                 ######               :\n" +
-                                            ":#     # #####  ###### #      #      # #    #  ####     #     # ###### ######:\n" +
-                                            ":#       #    # #      #      #      # ##   # #    #    #     # #      #     :\n" +
-                                            ": #####  #    # #####  #      #      # # #  # #         ######  #####  ##### :\n" +
-                                            ":      # #####  #      #      #      # #  # # #  ###    #     # #      #     :\n" +
-                                            ":#     # #      #      #      #      # #   ## #    #    #     # #      #     :\n" +
-                                            ": #####  #      ###### ###### ###### # #    #  ####     ######  ###### ######:\n" +
-                                            "··············································································";
-                            System.out.println(art);
-                    /*DECLARACION DE NIVELES SPELLING BEE*/
-                    String [] nsbBasico = {"add", "eye", "ear", "boat", "happy", "lion", "night", "milk", "uncle", "thank"};
-                    String [] nsbMedio = {"chef", "brush", "sister", "desert", "kitchen", "Monday", "breakfast", "horse", "quite", "listen"};
-                    String [] nsbNormal = {"intelligent", "incredible", "classmate", "celebration", "scissors", "television", "kilometer", "diagram", "January", "Mexican"};
-                    String [] nsbDificil = {"disappear", "apologize", "appreciate", "immediately", "knock", "license", "weigh", "rhyme", "multimedia", "mysterious"};
-                    String [] nsbExpert = {"embarrass", "puncture", "sustainable", "acknowledge",  "wriggle", "grease", "harass", "puncture", "deceive", "guarantee"};
+                    nivel = "el nivel";
+                    System.out.println(usuario + ", elegiste:\n");
+                    String art =
+                            "       ···············································································\n" +
+                                    "       : #####                                                 ######               :\n" +
+                                    "       :#     # #####  ###### #      #      # #    #  ####     #     # ###### ######:\n" +
+                                    "       :#       #    # #      #      #      # ##   # #    #    #     # #      #     :\n" +
+                                    "       : #####  #    # #####  #      #      # # #  # #         ######  #####  ##### :\n" +
+                                    "       :      # #####  #      #      #      # #  # # #  ###    #     # #      #     :\n" +
+                                    "       :#     # #      #      #      #      # #   ## #    #    #     # #      #     :\n" +
+                                    "       : #####  #      ###### ###### ###### # #    #  ####     ######  ###### ######:\n" +
+                                    "       ··············································································";
+                    System.out.println(art);
+                    System.out.println("\n");
+
+                    /*DECLARACION DE NIVELES SPELLING BEE (CONVERTIDOS A MAYÚSCULAS)*/
+                    String[] nsbBasico = {"ADD", "EYE", "EAR", "BOAT", "HAPPY", "LION", "NIGHT", "MILK", "UNCLE", "THANK"};
+                    String[] nsbMedio = {"CHEF", "BRUSH", "SISTER", "DESERT", "KITCHEN", "MONDAY", "BREAKFAST", "HORSE", "QUITE", "LISTEN"};
+                    String[] nsbNormal = {"INTELLIGENT", "INCREDIBLE", "CLASSMATE", "CELEBRATION", "SCISSORS", "TELEVISION", "KILOMETER", "DIAGRAM", "JANUARY", "MEXICAN"};
+                    String[] nsbDificil = {"DISAPPEAR", "APOLOGIZE", "APPRECIATE", "IMMEDIATELY", "KNOCK", "LICENSE", "WEIGH", "RHYME", "MULTIMEDIA", "MYSTERIOUS"};
+                    String[] nsbExpert = {"EMBARRASS", "PUNCTURE", "SUSTAINABLE", "ACKNOWLEDGE", "WRIGGLE", "GREASE", "HARASS", "DECEIVE", "GUARANTEE"};
 
                     int nivelSpellingBee;
 
@@ -71,32 +121,44 @@ public class Application {
                         switch (nivelSpellingBee) {
                             case 1:
                                 nnombre = "Básico";
+                                PALABRAS_JUEGO = nsbBasico; // <-- ASIGNACIÓN CLAVE
                                 break;
                             case 2:
                                 nnombre = "Medio";
+                                PALABRAS_JUEGO = nsbMedio; // <-- ASIGNACIÓN CLAVE
                                 break;
                             case 3:
                                 nnombre = "Normal";
+                                PALABRAS_JUEGO = nsbNormal; // <-- ASIGNACIÓN CLAVE
                                 break;
                             case 4:
                                 nnombre = "Difícil";
+                                PALABRAS_JUEGO = nsbDificil; // <-- ASIGNACIÓN CLAVE
                                 break;
                             case 5:
                                 nnombre = "Expert";
+                                PALABRAS_JUEGO = nsbExpert; // <-- ASIGNACIÓN CLAVE
                                 break;
                             default:
                                 System.out.print("Opción invalida. Ese número no corresponde a ningún nivel. Intenta de nuevo: ");
                                 break;
                         }
                     }
-                    while(nivelSpellingBee<1 || nivelSpellingBee>5);
+                    while (nivelSpellingBee < 1 || nivelSpellingBee > 5);
+                    // Consumir el salto de línea pendiente después de sc.nextInt()
+                    sc.nextLine();
 
                     /*Preguntar modalidad Spelling Bee */
                     System.out.print("Ahora elige la modalidad\n1. Modalidad Tradicional\n2. Modalidad Retos y Juegos\nIngresa 1 o 2: ");
                     int modalidadSpellingBee;
                     /*leer modalidad Spelling Bee*/
                     do {
-                        modalidadSpellingBee = sc.nextInt();
+                        if (sc.hasNextInt()) {
+                            modalidadSpellingBee = sc.nextInt();
+                        } else {
+                            sc.next();
+                            modalidadSpellingBee = 0;
+                        }
                         switch (modalidadSpellingBee) {
                             case 1:
                                 allnombre = "Spellin Bee Modalidad Tradicional";
@@ -114,30 +176,36 @@ public class Application {
                     break;
 
                 case 2:
-                    nivel ="la categoría gramatical";
+                    nivel = "la categoría gramatical";
                     /*Preguntar modalidad Vocabulario*/
-                   System.out.println(nombre + ", elegiste: ");
-                        String art2=
-                                " _     ____  ____ ____  ____  _     _     ____  ____  _  ____ \n" +
-                                "/ \\ |\\/  _ \\/   _Y  _ \\/  _ \\/ \\ /\\/ \\   /  _ \\/  __\\/ \\/  _ \\\n" +
-                                "| | //| / \\||  / | / \\|| | //| | ||| |   | / \\||  \\/|| || / \\|\n" +
-                                "| \\// | \\_/||  \\_| |-||| |_\\\\| \\_/|| |_/\\| |-|||    /| || \\_/|\n" +
-                                "\\__/  \\____/\\____|_/ \\|\\____/\\____/\\____/\\_/ \\|\\_/\\_\\\\_/\\____/\n" +
-                                "                                                              \n";
+                    System.out.println(usuario + ", elegiste:\n ");
+                    String art2 =
+                            "        _     ____  ____ ____  ____  _     _     ____  ____  _  ____ \n" +
+                                    "       / \\ |\\/  _ \\/   _Y  _ \\/  _ \\/ \\ /\\/ \\   /  _ \\/  __\\/ \\/  _ \\\n" +
+                                    "       | | //| / \\||  / | / \\|| | //| | ||| |   | / \\||  \\/|| || / \\|\n" +
+                                    "       | \\// | \\_/||  \\_| |-||| |_\\\\| \\_/|| |_/\\| |-|||    /| || \\_/|\n" +
+                                    "       \\__/  \\____/\\____|_/ \\|\\____/\\____/\\____/\\_/ \\|\\_/\\_\\\\_/\\____/\n" +
+                                    "                                                              \n";
                     System.out.println(art2);
-                    /*DECLARACION DE NIVELES SPELLING BEE*/
-                    String [] nvVerbo = {"manage", "expect", "suggest", "borrow", "lend", "give up", "happen", "improve", "worry", "look for"};
-                    String [] nvSustantivo = {"career", "skill", "knowledge", "solution", "environment", "experience", "luggage", "customer", "opinion", "traffic"};
-                    String [] nvPreposiciones = {"across", "against", "through", "except for", "towards", "unlike", "in spite of", "by", "during", "untill"};
-                    String [] nvAdjetivos = {"crowded", "comfortable", "polite", "rude", "easy", "available", "necessary", "successful", "tired", "exciting"};
-                    String [] nvExpresionescomunes = {"I suppose so", "hold on a minute", "never mind", "to be honest", "looking forward to", "how about", "by the way", "at least", "as far as I know", "it's up to you"};
+                    System.out.println("\n");
+                    /*DECLARACION DE NIVELES VOCABULARIO*/
+                    String[] nvVerbo = {"manage", "expect", "suggest", "borrow", "lend", "give up", "happen", "improve", "worry", "look for"};
+                    String[] nvSustantivo = {"career", "skill", "knowledge", "solution", "environment", "experience", "luggage", "customer", "opinion", "traffic"};
+                    String[] nvPreposiciones = {"across", "against", "through", "except for", "towards", "unlike", "in spite of", "by", "during", "untill"};
+                    String[] nvAdjetivos = {"crowded", "comfortable", "polite", "rude", "easy", "available", "necessary", "successful", "tired", "exciting"};
+                    String[] nvExpresionescomunes = {"I suppose so", "hold on a minute", "never mind", "to be honest", "looking forward to", "how about", "by the way", "at least", "as far as I know", "it's up to you"};
 
                     int nivelVocabulario;
                     System.out.println("Ingresa la categoría gramatical que deseas estudiar (recuerda que se dara por hecho que ya has cursado las categorías gramaticales anterirores a ella):");
                     System.out.println("1.Verbo\n" + "2.Sustantivo\n" + "3.Preposiciones\n" + "4.Adjetivos\n" + "5.Expresiones comunes");
 
                     do {
-                        nivelVocabulario= sc.nextInt();
+                        if (sc.hasNextInt()) {
+                            nivelVocabulario = sc.nextInt();
+                        } else {
+                            sc.next();
+                            nivelVocabulario = 0;
+                        }
                         switch (nivelVocabulario) {
                             case 1:
                                 nnombre = "Verbo";
@@ -159,17 +227,24 @@ public class Application {
                                 break;
                         }
                     }
-                    while(nivelVocabulario<1 || nivelVocabulario>5);
+                    while (nivelVocabulario < 1 || nivelVocabulario > 5);
+                    // Consumir el salto de línea pendiente después de sc.nextInt()
+                    sc.nextLine();
 
                     /*Preguntar modalidad Spelling Bee */
                     System.out.print("Ahora elige la modalidad\n1. Modalidad Tradicional\n2. Modalidad Juegos\nIngresa 1 o 2: ");
                     int modalidadVocabulario;
                     /*Leer modalidad Vocabulario*/
                     do {
-                        modalidadVocabulario = sc.nextInt();
+                        if (sc.hasNextInt()) {
+                            modalidadVocabulario = sc.nextInt();
+                        } else {
+                            sc.next();
+                            modalidadVocabulario = 0;
+                        }
                         switch (modalidadVocabulario) {
                             case 1:
-                                allnombre ="Vocabulario Modalidad Tradicional";
+                                allnombre = "Vocabulario Modalidad Tradicional";
                                 modalidadTradicionalVocabulario();
                                 break;
                             case 2:
@@ -189,13 +264,14 @@ public class Application {
         while (opcionprincipal != 1 && opcionprincipal != 2);
     }
 
-    public static void pause(long ms){
+    public static void pause(long ms) {
         try {
             Thread.sleep(ms);
-        }catch (InterruptedException e){}
+        } catch (InterruptedException e) {
+        }
     }
 
-    public static void contador(){
+    public static void contador() {
         pause(4000);
         System.out.println("¿Estas list@?...");
         sc.nextLine();
@@ -211,11 +287,11 @@ public class Application {
         System.out.println("Inicia!!");
     }
 
-    public static void bienvenida(){
+    public static void bienvenida() {
         pause(800);
         System.out.println("cargando instrucciones...");
         pause(1500);
-        System.out.println("¡Bienvenid@ " + usuario + " :D!\nA continuación iniciará la ronda de "+ allnombre + ", en "+ nivel +" "+ nnombre);
+        System.out.println("¡Bienvenid@ " + usuario + " :D!\nA continuación iniciará la ronda de " + allnombre + ", en " + nivel + " " + nnombre);
         System.out.println("Instrucciones:");
     }
 
@@ -229,21 +305,31 @@ public class Application {
         System.out.println("Has elegido la Modalidad Retos y Juegos, en el nivel " + nnombre);
         System.out.println("¿Deseas cursar 1- Retos o 2-Juegos?");
         int sbRetoJuego;
-        do{
-            sbRetoJuego= sc.nextInt();
-            switch (sbRetoJuego){
+        do {
+            if (sc.hasNextInt()) {
+                sbRetoJuego = sc.nextInt();
+            } else {
+                sc.next();
+                sbRetoJuego = 0;
+            }
+            switch (sbRetoJuego) {
                 case 1:
                     System.out.println("¡Excelente decisión! Ahora porfavor ingresa el numero de reto que te gustaría jugar\n1- Deletreo Rápido\n2- Desafío de Precisión");
                     int sbReto;
-                    do{
-                        sbReto = sc.nextInt();
-                        switch (sbReto){
+                    do {
+                        if (sc.hasNextInt()) {
+                            sbReto = sc.nextInt();
+                        } else {
+                            sc.next();
+                            sbReto = 0;
+                        }
+                        switch (sbReto) {
                             case 1:
-                                allnombre ="reto Deletreo Rápido";
+                                allnombre = "reto Deletreo Rápido";
                                 sbrDeletreoRapido();
                                 break;
                             case 2:
-                                allnombre ="reto Desafio de Precisión";
+                                allnombre = "reto Desafio de Precisión";
                                 sbrDesafioPrecision();
                                 break;
                             default:
@@ -251,24 +337,31 @@ public class Application {
                                 break;
                         }
                     }
-                    while(sbReto < 1 || sbReto > 3);
+                    while (sbReto < 1 || sbReto > 3);
                     break;
                 case 2:
                     System.out.println("¡Excelente decisión! Ahora porfavor ingresa el numero de juego que te gustaría jugar\n1- Ahorcado\n2- Completar letras faltantes\n3- Ordenar letras");
                     int sbJuego;
-                    do{
-                        sbJuego = sc.nextInt();
-                        switch (sbJuego){
+                    do {
+                        if (sc.hasNextInt()) {
+                            sbJuego = sc.nextInt();
+                        } else {
+                            sc.next();
+                            sbJuego = 0;
+                        }
+                        switch (sbJuego) {
                             case 1:
-                                allnombre ="juego Ahorcado";
+                                allnombre = "juego Ahorcado";
+                                // Consumir el salto de línea pendiente después de sc.nextInt()
+                                sc.nextLine();
                                 sbjAhorcado();
                                 break;
                             case 2:
-                                allnombre ="juego Completar Letras Faltantes";
+                                allnombre = "juego Completar Letras Faltantes";
                                 sbjCompletarLetrasFaltantes();
                                 break;
                             case 3:
-                                allnombre ="juego Ordenar Letras";
+                                allnombre = "juego Ordenar Letras";
                                 sbjOrdenarLetras();
                                 break;
                             default:
@@ -276,32 +369,146 @@ public class Application {
                                 break;
                         }
                     }
-                    while(sbJuego < 1 || sbJuego > 3);
+                    while (sbJuego < 1 || sbJuego > 3);
                     break;
                 default:
                     System.out.print("Opción invalida. Ese número no corresponde a ninguna opcion. Intenta de nuevo: ");
                     break;
             }
         }
-        while(sbRetoJuego!= 1 && sbRetoJuego != 2);
+        while (sbRetoJuego != 1 && sbRetoJuego != 2);
     }
 
-    public static void sbrDeletreoRapido(){
+    public static void sbrDeletreoRapido() {
         bienvenida();
         System.out.println("En este reto deberás:\n-Escribir la mayor cantidad de palabras correctamente en 3 minutos.\n-Escribir cada palabra en inglés a partir de su traducción al español, de manera consecutiva, antes de pasar a la siguiente. \n-Al terminar el tiempo, revisar un resumen de resultados que muestra tus aciertos, errores y palabras falladas.");
         contador();
     }
 
-    public static void sbrDesafioPrecision(){
+    public static void sbrDesafioPrecision() {
         bienvenida();
         System.out.println("En este reto deberás:\n-Deletrear la mayor cantidad de palabras posible, pero solo puedes cometer tres errores.\n-Cuando cometas el tercer error, el reto terminará automáticamente y verás un resumen con tus aciertos y errores.\n-Este reto te ayudará a mejorar tu precisión y concentración mientras escribes.");
         contador();
     }
-
-    public static void sbjAhorcado(){
+    public static void sbjAhorcado()
+    {
+        if (PALABRAS_JUEGO == null || PALABRAS_JUEGO.length == 0) {
+            PALABRAS_JUEGO = PALABRAS_BASE;
+        }
+        contadorIncorrectas = 0;
+        letrasIncorrectas = new char[INTENTOS_MAXIMOS];
         bienvenida();
         System.out.println("En este juego deberás:\n"+ "1. Adivinar la palabra letra por letra, completándola antes de que se terminen tus intentos.\n" + "2. Cada letra correcta se mostrará en su posición correspondiente, mientras que los errores se contabilizan.\n" + "3. Recibirás retroalimentación inmediata, y si no logras adivinar la palabra, al finalizar se mostrará la palabra completa.");
         contador();
+        seleccionarPalabra();
+        inicializarPalabraAdivinada();
+
+        while (!juegoTerminado()) {
+            mostrarEstadoDelJuego();
+            mostrarMuñeco();
+            System.out.print("Introduce una letra: ");
+            String input = sc.nextLine().toUpperCase();
+
+            if (input.length() != 1 || !Character.isLetter(input.charAt(0))) {
+                System.out.println("Entrada inválida. Por favor, introduce una sola letra.");
+                continue;
+            }
+            char letra = input.charAt(0);
+
+            if (yaSeIntento(letra)) {
+                System.out.println("Ya intentaste la letra '" + letra + "'. Intenta con otra.");
+                continue;
+            }
+
+            if (!adivinarLetra(letra)) {
+                System.out.println("Letra incorrecta!");
+                letrasIncorrectas[contadorIncorrectas] = letra;
+                contadorIncorrectas++;
+            } else {
+                System.out.println("Letra correcta!");
+            }
+        }
+
+        mostrarEstadoDelJuego();
+        mostrarMuñeco();
+        if (palabraCompletada()) {
+            System.out.println("¡Ganaste! La palabra era: " + palabraSecreta);
+        } else {
+            System.out.println("¡Perdiste! El ahorcado se completó. La palabra era: " + palabraSecreta);
+        }
+    }
+    private static void seleccionarPalabra() {
+        int indiceAleatorio = (int) (Math.random() * PALABRAS_JUEGO.length);
+        palabraSecreta = PALABRAS_JUEGO[indiceAleatorio];
+    }
+
+    private static void inicializarPalabraAdivinada() {
+        palabraAdivinada = new char[palabraSecreta.length()];
+        Arrays.fill(palabraAdivinada, '_');
+    }
+
+    private static boolean yaSeIntento(char letra) {
+        for (char c : palabraAdivinada) {
+            if (c == letra) return true;
+        }
+        for (int i = 0; i < contadorIncorrectas; i++) {
+            if (letrasIncorrectas[i] == letra) return true;
+        }
+        return false;
+    }
+
+    private static void mostrarEstadoDelJuego() {
+        System.out.println("\n--- Estado Actual ---");
+        System.out.println("Palabra: " + String.valueOf(palabraAdivinada));
+        System.out.println("Intentos fallidos: " + contadorIncorrectas + "/" + INTENTOS_MAXIMOS);
+        System.out.print("Letras incorrectas: ");
+        for (int i = 0; i < contadorIncorrectas; i++) {
+            System.out.print(letrasIncorrectas[i]);
+            if (i < contadorIncorrectas - 1) System.out.print(", ");
+        }
+        System.out.println();
+    }
+
+    private static boolean adivinarLetra(char letra) {
+        boolean letraAdivinada = false;
+        for (int i = 0; i < palabraSecreta.length(); i++) {
+            if (palabraSecreta.charAt(i) == letra) {
+                if (palabraAdivinada[i] == '_') {
+                    palabraAdivinada[i] = letra;
+                    letraAdivinada = true;
+                }
+            }
+        }
+        return letraAdivinada;
+    }
+
+    private static boolean juegoTerminado() {
+        return palabraCompletada() || contadorIncorrectas >= INTENTOS_MAXIMOS;
+    }
+
+    private static boolean palabraCompletada() {
+        for (char c : palabraAdivinada) {
+            if (c == '_') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void mostrarMuñeco() {
+        String[] muñeco = {
+                " _______ \n |/      |\n |      \n |      \n |      \n |      \n_|___  ", // 0
+                " _______ \n |/      |\n |      O\n |      \n |      \n |      \n_|___  ", // 1
+                " _______ \n |/      |\n |      O\n |      | \n |      \n |      \n_|___  ", // 2
+                " _______ \n |/      |\n |      O\n |     /|\\\n |      \n |      \n_|___  ", // 3
+                " _______ \n |/      |\n |      O\n |     /|\\\n |     / \n |      \n_|___  ", // 4
+                " _______ \n |/      |\n |      O\n |     /|\\\n |     / \\\n |      \n_|___  ", // 5 (último error antes de perder)
+                " _______ \n |/      |\n |      O\n |     /|\\\n |     / \\\n |      \n_|___  ", // 6 (Estado final de pérdida)
+        };
+        int indice = Math.min(contadorIncorrectas, INTENTOS_MAXIMOS);
+        if (indice < muñeco.length) {
+            System.out.println(muñeco[indice]);
+        }
     }
 
     public static void sbjCompletarLetrasFaltantes(){
@@ -327,7 +534,12 @@ public class Application {
         int vjuego;
         System.out.println("Ingresa el juego que te gustaría jugar\n1- Palabras relacionadas\n2- Completar oraciones\n3- Adivinar la palabra");
         do{
-            vjuego= sc.nextInt();
+            if (sc.hasNextInt()) {
+                vjuego = sc.nextInt();
+            } else {
+                sc.next();
+                vjuego = 0;
+            }
             switch (vjuego){
                 case 1:
                     allnombre = "juego Palabras Relacionadas";
