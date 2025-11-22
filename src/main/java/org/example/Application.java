@@ -406,6 +406,7 @@ public class Application {
         while (!juegoTerminado()) {
             mostrarEstadoDelJuego();
             mostrarMuñeco();
+            Scanner sc = new Scanner(System.in);
             System.out.print("Introduce una letra: ");
             String input = sc.nextLine().toUpperCase();
 
