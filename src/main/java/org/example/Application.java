@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 import java.util.Arrays;
 public class Application {
     static Scanner sc = new Scanner(System.in);
@@ -6,13 +7,36 @@ public class Application {
     static String nnombre;
     static String allnombre;
     static String nivel;
-    private static final String[] PALABRAS_BASE = {"PROGRAMACION", "JAVA", "DESARROLLO", "CODIGO", "COMPUTADORA"};
-    private static String[] PALABRAS_JUEGO = PALABRAS_BASE;
-    private static String palabraSecreta;
-    private static char[] palabraAdivinada;
-    private static char[] letrasIncorrectas = new char[6];
-    private static int contadorIncorrectas = 0;
-    private static final int INTENTOS_MAXIMOS = 6;
+  static final String[] PALABRAS_BASE = {"PROGRAMACION", "JAVA", "DESARROLLO", "CODIGO", "COMPUTADORA"};
+    static String[] PALABRAS_JUEGO = PALABRAS_BASE;
+   static String palabraSecreta;
+     static char[] palabraAdivinada;
+     static char[] letrasIncorrectas = new char[6];
+    static int contadorIncorrectas = 0;
+    static final int INTENTOS_MAXIMOS = 6;
+    static int aciertos = 0;
+    static int errores = 0;
+
+    static int[] palabrasFalladas = new int[10];
+    static int contadorFallos = 0;
+
+    static int[] pistaUsada = new int[10];
+
+    static Random random = new Random();
+
+    /*DECLARACION DE NIVELES SPELLING BEE*/
+    static String [][] nsbBasico = {
+            {"add", "Complete the sentence with the correct English word:\nPlease ___ the numbers to get the result.", "Read the definition and write the correct English word:\nTo combine two or more numbers.", "Write the English word for this Spanish meaning:\nAgregar"},
+            {"eye", "Complete the sentence with the correct English word:\nShe closed one ___.", "Read the definition and write the correct English word:\nThe organ you use to see.", "Write the English word for this Spanish meaning:\nOjo"},
+            {"ear", "Complete the sentence with the correct English word:\nHe whispered the secret into my ___.", "Read the definition and write the correct English word:\nThe organ you use to hear sounds.", "Write the English word for this Spanish meaning: \nOreja"},
+            {"boat", "Complete the sentence with the correct English word:\nWe crossed the lake in a small ___.", "Read the definition and write the correct English word:\nA vehicle used to travel on water.", "Write the English word for this Spanish meaning: \nBarco"},
+            {"happy", "Complete the sentence with the correct English word:\nShe felt very ___ on her birthday.", "Read the definition and write the correct English word:\nFeeling joy or pleasure.", "Write the English word for this Spanish meaning: \nFeliz"},
+            {"lion", "Complete the sentence with the correct English word:\nThe ___ is known as the king of the jungle.", "Read the definition and write the correct English word:\nA large wild cat with a mane.", "Write the English word for this Spanish meaning: \nLeón"},
+            {"night", "Complete the sentence with the correct English word:\nI like to read at ___.", "Read the definition and write the correct English word:\nThe time of day when it is dark.", "Write the English word for this Spanish meaning: \nNoche"},
+            {"milk", "Complete the sentence with the correct English word:\nCould you buy some ___ at the store?", "Read the definition and write the correct English word:\nA white liquid produced by cows.", "Write the English word for this Spanish meaning: \nLeche"},
+            {"uncle", "Complete the sentence with the correct English word:\nMy ___ visits us every Sunday.", "Read the definition and write the correct English word:\nYour parents’ brother.", "Write the English word for this Spanish meaning: \nTío"},
+            {"thank", "Complete the sentence with the correct English word:\nDon’t forget to ___ your teacher.", "Read the definition and write the correct English word:\nTo express gratitude.", "Write the English word for this Spanish meaning: \nAgradecer"}
+    };
 
     public static void main(String[] args) {
         /*Bienvenida*/
@@ -187,89 +211,89 @@ public class Application {
                                     "       \\__/  \\____/\\____|_/ \\|\\____/\\____/\\____/\\_/ \\|\\_/\\_\\\\_/\\____/\n" +
                                     "                                                              \n";
                     System.out.println(art2);
-                        System.out.println("\n");
-                        /*DECLARACION DE NIVELES VOCABULARIO*/
-                        String[] nvVerboregulares = { "play", "work", "talk", "watch", "clean", "open", "help", "start", "call", "live" };
-                        String[] nvVerbosirregulares = {"go", "eat", "see", "take", "come", "drink", "write", "begin", "run", "break"};
-                        String[] nvSustantivo = {"career", "skill", "knowledge", "solution", "environment", "experience", "luggage", "customer", "opinion", "traffic"};
-                        String[] nvPreposiciones = {"across", "against", "through", "except for", "towards", "unlike", "in spite of", "by", "during", "untill"};
-                        String[] nvAdjetivos = {"crowded", "comfortable", "polite", "rude", "easy", "available", "necessary", "successful", "tired", "exciting"};
-                        String[] nvExpresionescomunes = {"I suppose so", "hold on a minute", "never mind", "to be honest", "looking forward to", "how about", "by the way", "at least", "as far as I know", "it's up to you"};
+                    System.out.println("\n");
+                    /*DECLARACION DE NIVELES VOCABULARIO*/
+                    String[] nvVerboregulares = { "play", "work", "talk", "watch", "clean", "open", "help", "start", "call", "live" };
+                    String[] nvVerbosirregulares = {"go", "eat", "see", "take", "come", "drink", "write", "begin", "run", "break"};
+                    String[] nvSustantivo = {"career", "skill", "knowledge", "solution", "environment", "experience", "luggage", "customer", "opinion", "traffic"};
+                    String[] nvPreposiciones = {"across", "against", "through", "except for", "towards", "unlike", "in spite of", "by", "during", "untill"};
+                    String[] nvAdjetivos = {"crowded", "comfortable", "polite", "rude", "easy", "available", "necessary", "successful", "tired", "exciting"};
+                    String[] nvExpresionescomunes = {"I suppose so", "hold on a minute", "never mind", "to be honest", "looking forward to", "how about", "by the way", "at least", "as far as I know", "it's up to you"};
 
-                        int nivelVocabulario;
-                        System.out.println("Ingresa la categoría gramatical que deseas estudiar (recuerda que se dara por hecho que ya has cursado las categorías gramaticales anterirores a ella):");
-                        System.out.println("1.Verbo\n" + "2.Sustantivo\n" + "3.Preposiciones\n" + "4.Adjetivos\n" + "5.Expresiones comunes");
+                    int nivelVocabulario;
+                    System.out.println("Ingresa la categoría gramatical que deseas estudiar (recuerda que se dara por hecho que ya has cursado las categorías gramaticales anterirores a ella):");
+                    System.out.println("1.Verbo\n" + "2.Sustantivo\n" + "3.Preposiciones\n" + "4.Adjetivos\n" + "5.Expresiones comunes");
 
-                        do {
-                            if (sc.hasNextInt()) {
-                                nivelVocabulario = sc.nextInt();
-                            } else {
-                                sc.next();
-                                nivelVocabulario = 0;
-                            }
-                            switch (nivelVocabulario) {
-                                case 1:
-                                    nnombre = "Verbo";
-                                    int formadeverbo;
-                                        System.out.println("Selecciona la forma de verbo que deseas estudiar");
-                                        System.out.println("1.Verbos Regulares\n" + "2.Verbos Irregulares");
-                                    do {
-                                        if (sc.hasNextInt()) {
-                                            formadeverbo = sc.nextInt();
-                                        } else {
-                                            sc.next();
-                                            formadeverbo = 0;
-                                        }
-                                        switch (formadeverbo) {
-                                            case 1:
-                                                System.out.println("Has elegido verbos regulares");
-                                                PALABRAS_VOCABULARIO = nvVerboregulares;
-                                                break;
-                                            case 2:
-                                                System.out.println("Has elegido verbos irregulares");
-                                                PALABRAS_VOCABULARIO = nvVerbosirregulares;
-                                                break;
-                                            default:
-                                                System.out.print("Opción invalida, debes ingresar 1 o 2. Intenta de nuevo: ");
-                                                break;
-                                        }
-                                    }while (formadeverbo < 1 || formadeverbo > 2);
-                                    break;
-                                case 2:
-                                    nnombre = "Sustantivo";
-                                    PALABRAS_VOCABULARIO = nvSustantivo;
-                                    break;
-
-                                case 3:
-                                    nnombre = "Preposiciones";
-                                    PALABRAS_VOCABULARIO = nvPreposiciones;
-                                    break;
-
-                                case 4:
-                                    nnombre = "Adjetivos";
-                                    PALABRAS_VOCABULARIO = nvAdjetivos;
-                                    break;
-
-                                case 5:
-                                    nnombre = "Expresiones comunes";
-                                    PALABRAS_VOCABULARIO = nvExpresionescomunes;
-                                    break;
-
-                                default:
-                                    System.out.print("Opción invalida. Ese número no corresponde a ninguna categoría gramatical. Intenta de nuevo: ");
-                                    break;
-
-                            }
+                    do {
+                        if (sc.hasNextInt()) {
+                            nivelVocabulario = sc.nextInt();
+                        } else {
+                            sc.next();
+                            nivelVocabulario = 0;
                         }
-                        while (nivelVocabulario < 1 || nivelVocabulario > 5);
-                        break;
-                    default:
-                        System.out.print("Opción invalida, debes ingresar 1 o 2. Intenta de nuevo: ");
-                }
+                        switch (nivelVocabulario) {
+                            case 1:
+                                nnombre = "Verbo";
+                                int formadeverbo;
+                                System.out.println("Selecciona la forma de verbo que deseas estudiar");
+                                System.out.println("1.Verbos Regulares\n" + "2.Verbos Irregulares");
+                                do {
+                                    if (sc.hasNextInt()) {
+                                        formadeverbo = sc.nextInt();
+                                    } else {
+                                        sc.next();
+                                        formadeverbo = 0;
+                                    }
+                                    switch (formadeverbo) {
+                                        case 1:
+                                            System.out.println("Has elegido verbos regulares");
+
+                                            break;
+                                        case 2:
+                                            System.out.println("Has elegido verbos irregulares");
+
+                                            break;
+                                        default:
+                                            System.out.print("Opción invalida, debes ingresar 1 o 2. Intenta de nuevo: ");
+                                            break;
+                                    }
+                                }while (formadeverbo < 1 || formadeverbo > 2);
+                                break;
+                            case 2:
+                                nnombre = "Sustantivo";
+
+                                break;
+
+                            case 3:
+                                nnombre = "Preposiciones";
+
+                                break;
+
+                            case 4:
+                                nnombre = "Adjetivos";
+
+                                break;
+
+                            case 5:
+                                nnombre = "Expresiones comunes";
+
+                                break;
+
+                            default:
+                                System.out.print("Opción invalida. Ese número no corresponde a ninguna categoría gramatical. Intenta de nuevo: ");
+                                break;
+
+                        }
+                    }
+                    while (nivelVocabulario < 1 || nivelVocabulario > 5);
+                    break;
+                default:
+                    System.out.print("Opción invalida, debes ingresar 1 o 2. Intenta de nuevo: ");
             }
-            while (opcionprincipal != 1 && opcionprincipal != 2);
-            modalidadTradicionalojuegos();
         }
+        while (opcionprincipal != 1 && opcionprincipal != 2);
+        modalidadTradicionalojuegos();
+    }
 
     private static void modalidadTradicionalojuegos() {
 
@@ -329,9 +353,88 @@ public class Application {
     }
 
     public static void modalidadTradicionalSpellingBee() {
+        aciertos = 0;
+        errores = 0;
+        contadorFallos = 0;
+        for (int i = 0; i < palabrasFalladas.length; i++) palabrasFalladas[i] = -1;
+
         bienvenida();
         System.out.println("1- Se te mostrará la traducción, la definición en inglés de una palabra, o una oración con un espacio en blanco donde falta la palabra.\n2- Escribe la palabra en inglés correcta que corresponda a lo que se muestra.\n 3- Cada intento recibirá retroalimentación inmediata para saber si acertaste o no.\n4- Al terminar la ronda, verás un resumen con tus aciertos y errores para evaluar tu desempeño.");
         contador();
+
+        // PRIMERA RONDA
+        for (int i = 0; i < 10; i++) {
+            int pista = (int)(Math.random() * 3);
+            pistaUsada[i] = pista;
+
+            String prompt = nsbBasico[i][pista + 1];
+            System.out.println("Pregunta " + (i+1) + ":");
+            System.out.println(nsbBasico[i][pista+1]);
+            System.out.print("Tu respuesta: ");
+            String respuesta = sc.nextLine().trim();
+
+            String correcta = nsbBasico[i][0].trim();
+
+            if (respuesta.equalsIgnoreCase(correcta)) {
+                System.out.println("\n✔ Correcto!");
+                aciertos++;
+            } else {
+                System.out.println("\n✘ Incorrecto. La respuesta correcta era: " + correcta);
+                errores++;
+                palabrasFalladas[contadorFallos++] = i;
+            }
+
+            System.out.println("Presiona ENTER para continuar...");
+            sc.nextLine();// pausa hasta que el usuario presione Enter
+        }
+
+        // SEGUNDA RONDA
+        if (contadorFallos > 0) {
+            System.out.println("\n--- Ronda de repaso para palabras falladas ---");
+            for (int f = 0; f < contadorFallos; f++) {
+                int indicePalabra = palabrasFalladas[f];
+
+
+                int pista2;
+                do {
+                    pista2 = (int)(Math.random() * 3);
+                } while (pista2 == pistaUsada[indicePalabra]);
+
+                String prompt2 = nsbBasico[indicePalabra][pista2 + 1];
+                System.out.println("\nRepetición palabra " + (f + 1) + ":");
+                System.out.println(prompt2);
+
+                System.out.print("Tu respuesta: ");
+                String respuesta2 = sc.nextLine().trim().toLowerCase();
+
+                String correcta2 = nsbBasico[indicePalabra][0].toLowerCase();
+
+                if (respuesta2.equals(correcta2)) {
+                    System.out.println("✔ Correcto!");
+                    aciertos++;
+                } else {
+                    System.out.println("✘ Incorrecto de nuevo. La correcta era: " + correcta2);
+                    errores++;
+                }
+
+                System.out.println("Presiona ENTER para continuar...");
+                sc.nextLine();
+            }
+        }
+
+        // RESUMEN FINAL
+        System.out.println("\n--- RESULTADOS FINALES ---");
+        System.out.println("Aciertos: " + aciertos);
+        System.out.println("Errores: " + errores);
+        if (contadorFallos > 0) {
+            System.out.print("Palabras que preguntamos otra vez: ");
+            for (int i = 0; i < contadorFallos; i++) {
+                System.out.print(nsbBasico[palabrasFalladas[i]][0] + (i < contadorFallos - 1 ? ", " : "\n"));
+            return;
+            }
+        }
+        
+                
     }
 
     public static void modalidadRetosyJuegosSpellingBee() {
