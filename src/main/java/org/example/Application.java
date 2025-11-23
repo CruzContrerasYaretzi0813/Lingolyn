@@ -187,81 +187,115 @@ public class Application {
                                     "       \\__/  \\____/\\____|_/ \\|\\____/\\____/\\____/\\_/ \\|\\_/\\_\\\\_/\\____/\n" +
                                     "                                                              \n";
                     System.out.println(art2);
-                    System.out.println("\n");
-                    /*DECLARACION DE NIVELES VOCABULARIO*/
-                    String[] nvVerbo = {"manage", "expect", "suggest", "borrow", "lend", "give up", "happen", "improve", "worry", "look for"};
-                    String[] nvSustantivo = {"career", "skill", "knowledge", "solution", "environment", "experience", "luggage", "customer", "opinion", "traffic"};
-                    String[] nvPreposiciones = {"across", "against", "through", "except for", "towards", "unlike", "in spite of", "by", "during", "untill"};
-                    String[] nvAdjetivos = {"crowded", "comfortable", "polite", "rude", "easy", "available", "necessary", "successful", "tired", "exciting"};
-                    String[] nvExpresionescomunes = {"I suppose so", "hold on a minute", "never mind", "to be honest", "looking forward to", "how about", "by the way", "at least", "as far as I know", "it's up to you"};
+                        System.out.println("\n");
+                        /*DECLARACION DE NIVELES VOCABULARIO*/
+                        String[] nvVerboregulares = { "play", "work", "talk", "watch", "clean", "open", "help", "start", "call", "live" };
+                        String[] nvVerbosirregulares = {"go", "eat", "see", "take", "come", "drink", "write", "begin", "run", "break"};
+                        String[] nvSustantivo = {"career", "skill", "knowledge", "solution", "environment", "experience", "luggage", "customer", "opinion", "traffic"};
+                        String[] nvPreposiciones = {"across", "against", "through", "except for", "towards", "unlike", "in spite of", "by", "during", "untill"};
+                        String[] nvAdjetivos = {"crowded", "comfortable", "polite", "rude", "easy", "available", "necessary", "successful", "tired", "exciting"};
+                        String[] nvExpresionescomunes = {"I suppose so", "hold on a minute", "never mind", "to be honest", "looking forward to", "how about", "by the way", "at least", "as far as I know", "it's up to you"};
 
-                    int nivelVocabulario;
-                    System.out.println("Ingresa la categoría gramatical que deseas estudiar (recuerda que se dara por hecho que ya has cursado las categorías gramaticales anterirores a ella):");
-                    System.out.println("1.Verbo\n" + "2.Sustantivo\n" + "3.Preposiciones\n" + "4.Adjetivos\n" + "5.Expresiones comunes");
+                        int nivelVocabulario;
+                        System.out.println("Ingresa la categoría gramatical que deseas estudiar (recuerda que se dara por hecho que ya has cursado las categorías gramaticales anterirores a ella):");
+                        System.out.println("1.Verbo\n" + "2.Sustantivo\n" + "3.Preposiciones\n" + "4.Adjetivos\n" + "5.Expresiones comunes");
 
-                    do {
-                        if (sc.hasNextInt()) {
-                            nivelVocabulario = sc.nextInt();
-                        } else {
-                            sc.next();
-                            nivelVocabulario = 0;
-                        }
-                        switch (nivelVocabulario) {
-                            case 1:
-                                nnombre = "Verbo";
-                                break;
-                            case 2:
-                                nnombre = "Sustantivo";
-                                break;
-                            case 3:
-                                nnombre = "Preposiciones";
-                                break;
-                            case 4:
-                                nnombre = "Adjetivos";
-                                break;
-                            case 5:
-                                nnombre = "Expresiones comunes";
-                                break;
-                            default:
-                                System.out.print("Opción invalida. Ese número no corresponde a ninguna categoría gramatical. Intenta de nuevo: ");
-                                break;
-                        }
-                    }
-                    while (nivelVocabulario < 1 || nivelVocabulario > 5);
-                    // Consumir el salto de línea pendiente después de sc.nextInt()
-                    sc.nextLine();
+                        do {
+                            if (sc.hasNextInt()) {
+                                nivelVocabulario = sc.nextInt();
+                            } else {
+                                sc.next();
+                                nivelVocabulario = 0;
+                            }
+                            switch (nivelVocabulario) {
+                                case 1:
+                                    nnombre = "Verbo";
+                                    int formadeverbo;
+                                        System.out.println("Selecciona la forma de verbo que deseas estudiar");
+                                        System.out.println("1.Verbos Regulares\n" + "2.Verbos Irregulares");
+                                    do {
+                                        if (sc.hasNextInt()) {
+                                            formadeverbo = sc.nextInt();
+                                        } else {
+                                            sc.next();
+                                            formadeverbo = 0;
+                                        }
+                                        switch (formadeverbo) {
+                                            case 1:
+                                                System.out.println("Has elegido verbos regulares");
+                                                PALABRAS_VOCABULARIO = nvVerboregulares;
+                                                break;
+                                            case 2:
+                                                System.out.println("Has elegido verbos irregulares");
+                                                PALABRAS_VOCABULARIO = nvVerbosirregulares;
+                                                break;
+                                            default:
+                                                System.out.print("Opción invalida, debes ingresar 1 o 2. Intenta de nuevo: ");
+                                                break;
+                                        }
+                                    }while (formadeverbo < 1 || formadeverbo > 2);
+                                    break;
+                                case 2:
+                                    nnombre = "Sustantivo";
+                                    PALABRAS_VOCABULARIO = nvSustantivo;
+                                    break;
 
-                    /*Preguntar modalidad Spelling Bee */
-                    System.out.print("Ahora elige la modalidad\n1. Modalidad Tradicional\n2. Modalidad Juegos\nIngresa 1 o 2: ");
-                    int modalidadVocabulario;
-                    /*Leer modalidad Vocabulario*/
-                    do {
-                        if (sc.hasNextInt()) {
-                            modalidadVocabulario = sc.nextInt();
-                        } else {
-                            sc.next();
-                            modalidadVocabulario = 0;
+                                case 3:
+                                    nnombre = "Preposiciones";
+                                    PALABRAS_VOCABULARIO = nvPreposiciones;
+                                    break;
+
+                                case 4:
+                                    nnombre = "Adjetivos";
+                                    PALABRAS_VOCABULARIO = nvAdjetivos;
+                                    break;
+
+                                case 5:
+                                    nnombre = "Expresiones comunes";
+                                    PALABRAS_VOCABULARIO = nvExpresionescomunes;
+                                    break;
+
+                                default:
+                                    System.out.print("Opción invalida. Ese número no corresponde a ninguna categoría gramatical. Intenta de nuevo: ");
+                                    break;
+
+                            }
                         }
-                        switch (modalidadVocabulario) {
-                            case 1:
-                                allnombre = "Vocabulario Modalidad Tradicional";
-                                modalidadTradicionalVocabulario();
-                                break;
-                            case 2:
-                                modalidadJuegosVocabulario();
-                                break;
-                            default:
-                                System.out.print("Opción invalida, Esa opción no corresponde a ninguna modalidad. Intenta de nuevo: ");
-                                break;
-                        }
-                    }
-                    while (modalidadVocabulario != 1 && modalidadVocabulario != 2);
+                        while (nivelVocabulario < 1 || nivelVocabulario > 5);
+                        break;
+                    default:
+                        System.out.print("Opción invalida, debes ingresar 1 o 2. Intenta de nuevo: ");
+                }
+            }
+            while (opcionprincipal != 1 && opcionprincipal != 2);
+            modalidadTradicionalojuegos();
+        }
+
+    private static void modalidadTradicionalojuegos() {
+
+        System.out.print("Ahora elige la modalidad\n1. Modalidad Tradicional\n2. Modalidad Juegos\nIngresa 1 o 2: ");
+        int modalidadVocabulario;
+        do {
+            if (sc.hasNextInt()) {
+                modalidadVocabulario = sc.nextInt();
+            } else {
+                sc.next();
+                modalidadVocabulario = 0;
+            }
+            switch (modalidadVocabulario) {
+                case 1:
+                    allnombre = "Vocabulario Modalidad Tradicional";
+                    modalidadTradicionalVocabulario();
+                    break;
+                case 2:
+                    modalidadJuegosVocabulario();
                     break;
                 default:
-                    System.out.print("Opción invalida, debes ingresar 1 o 2. Intenta de nuevo: ");
+                    System.out.print("Opción invalida, Esa opción no corresponde a ninguna modalidad. Intenta de nuevo: ");
+                    break;
             }
         }
-        while (opcionprincipal != 1 && opcionprincipal != 2);
+        while (modalidadVocabulario != 1 && modalidadVocabulario != 2);
     }
 
     public static void pause(long ms) {
@@ -274,7 +308,6 @@ public class Application {
     public static void contador() {
         pause(4000);
         System.out.println("¿Estas list@?...");
-        sc.nextLine();
         sc.nextLine();
         System.out.println("Mucha Suerte!!");
         pause(800);
