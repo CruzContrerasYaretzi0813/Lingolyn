@@ -185,7 +185,7 @@ import java.util.Arrays;
                                 }
                                 switch (modalidadSpellingBee) {
                                     case 1:
-                                        allnombre = "Spellin Bee Modalidad Tradicional";
+                                        allnombre = "Spelling Bee Modalidad Tradicional";
                                         modalidadTradicionalSpellingBee();
                                         break;
                                     case 2:
@@ -331,7 +331,7 @@ import java.util.Arrays;
 
             public static void contador() {
                 pause(4000);
-                System.out.println("¿Estas list@?...");
+                System.out.println("¿Estás list@?...");
                 sc.nextLine();
                 System.out.println("Mucha Suerte!!");
                 pause(800);
@@ -346,7 +346,7 @@ import java.util.Arrays;
 
             public static void bienvenida() {
                 pause(800);
-                System.out.println("cargando instrucciones...");
+                System.out.println("Cargando instrucciones...");
                 pause(1500);
                 System.out.println("¡Bienvenid@ " + usuario + " :D!\nA continuación iniciará la ronda de " + allnombre + ", en " + nivel + " " + nnombre);
                 System.out.println("Instrucciones:");
